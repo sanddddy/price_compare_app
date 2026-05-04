@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Price Compare</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .search-box {
+      width: 300px;
+      padding: 10px;
+      border-radius: 25px;
+      border: 1px solid #ccc;
+    }
+    button { padding: 10px 20px; margin-left: 10px; }
+    .error { color: red; margin-top: 10px; }
+  </style>
+</head>
+<body style="background-color: rgb(189, 201, 222);">
+
+  <h1>Price Comparing</h1>
+
+  <!-- IH1 Purpose -->
+  <p>Enter the product name to compare prices from different stores and help you save money.</p>
+
+  <!-- IH2 Cost -->
+  <p>The search takes about 1-2 seconds.</p>
+
+  <input id="searchInput" class="search-box" placeholder="e.g. Dior Lip Glow">
+  <button onclick="search()">Search</button>
+
+  <p id="error" class="error"></p>
+
+  <script>
+    function search() {
+      const keyword = document.getElementById("searchInput").value.trim();
+
+      // IH8 Error Prevention
+      if (!keyword) {
+        document.getElementById("error").innerText = "Enter the product name";
+        return;
+      }
+
+      // IH7 Multiple Ways (Enter key)
+      window.location.href = `results.html?product=${encodeURIComponent(keyword)}`;
+    }
+
+    document.getElementById("searchInput").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") search();
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "Dior Lip Glow": [
+    {"store": "Sephora", "price": 38, "url": "#"},
+    {"store": "Ulta", "price": 36, "url": "#"},
+    {"store": "Nordstrom", "price": 37, "url": "#"}
+  ],
+  "Chanel Chance Perfume": [
+    {"store": "Sephora", "price": 145, "url": "#"},
+    {"store": "Macy's", "price": 140, "url": "#"},
+    {"store": "Nordstrom", "price": 142, "url": "#"}
+  ]
+}
