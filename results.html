@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Search Results</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .item { margin-bottom: 10px; padding: 10px; border: 1px solid #ccc; }
+    .best { background: #d4ffd4; }
+    button { margin-left: 10px; }
+  </style>
+</head>
+<body style="background-color: rgb(189, 201, 222);">
+
+  <button onclick="history.back()">← Back</button> <!-- IH5 -->
+
+  <h2>Search Results</h2>
+  <div id="results"></div>
+
+  <script>
+    async function loadData() {
+      const params = new URLSearchParams(window.location.search);
+      const product = params.get("product");
+
+      const res = await fetch("data.json");
+      const data = await res.json();
+
+      const list = data[product];
+
+      const container = document.getElementById("results");
+
+      if (!list) {
+        container.innerHTML = "<p>No results found.</p>";
+        return;
+      }
+
+      // Sort by price (User Story 2)
+      list.sort((a, b) => a.price - b.price);
+
+      list.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "item";
+
+        if (index === 0) div.classList.add("best"); // Best price highlight
+
+        div.innerHTML = `
+          <strong>${item.store}</strong> — $${item.price}
+          <button onclick="hideItem(this)">Hide</button> <!-- IH3 -->
+          <button onclick="viewDetail('${product}')">View Details</button> <!-- IH6 -->
+        `;
+
+        container.appendChild(div);
+      });
+    }
+
+    function hideItem(btn) {
+      btn.parentElement.remove();
+    }
+
+    function viewDetail(product) {
+      window.location.href = `detail.html?product=${encodeURIComponent(product)}`;
+    }
+
+    loadData();
+  </script>
+
+</body>
+</html>
